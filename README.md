@@ -38,4 +38,4 @@ The complete formal project report, containing detailed Entity-Relationship (ER)
 To showcase data analyst capabilities, this project includes a business intelligence extension:
 - **Dataset (`rental_data.csv`):** Generated and structured a mock database of 1,000+ transactional rental records.
 - **SQL Business Insights (`insights.sql`):** Developed complex SQL queries to analyze key business metrics including Gross Revenue, Revenue Contribution by Category, Top Demand Products, Preferred Payment Methods, and Low-Rating Customer Feedback Alerts for operational maintenance.
--
+
