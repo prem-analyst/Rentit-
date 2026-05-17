@@ -1,0 +1,61 @@
+-- ====================================================================
+-- RENTIT - ONLINE EQUIPMENT RENTAL MANAGEMENT SYSTEM (ANALYTICS)
+-- Purpose: Extracting Business Insights from 1,000+ Rental Transactions
+-- Author: Data Analyst Portfolio
+-- ====================================================================
+
+-- 1. TOTAL BUSINESS REVENUE & BOOKINGS
+-- Recruiter ko overall business ka scale dikhane ke liye
+SELECT 
+    COUNT(Booking_ID) AS Total_Rentals_Booked,
+    SUM(Total_Revenue) AS Gross_Revenue_INR,
+    AVG(Rental_Duration_Days) AS Average_Rental_Duration_Days
+FROM rental_data;
+
+
+-- 2. TOP PERFORMING EQUIPMENT CATEGORIES (Revenue Contribution)
+-- Business ko pata chalega kis category mein sabse zyada dhandha ho raha hai
+SELECT 
+    Equipment_Category,
+    COUNT(Booking_ID) AS Total_Orders,
+    SUM(Total_Revenue) AS Category_Revenue,
+    ROUND((SUM(Total_Revenue) / (SELECT SUM(Total_Revenue) FROM rental_data)) * 100, 2) AS Revenue_Percentage
+FROM rental_data
+GROUP BY Equipment_Category
+ORDER BY Category_Revenue DESC;
+
+
+-- 3. MOST POPULAR EQUIPMENT & CUSTOMER DEMAND
+-- Kaunsa saaman sabse zyada rent par jaata hai taaki stock maintained rahe
+SELECT 
+    Equipment_Name,
+    Equipment_Category,
+    COUNT(Booking_ID) AS Times_Rented,
+    AVG(Customer_Rating) AS Avg_Customer_Rating
+FROM rental_data
+GROUP BY Equipment_Name, Equipment_Category
+ORDER BY Times_Rented DESC
+LIMIT 5;
+
+
+-- 4. PREFERRED PAYMENT METHODS WITH TRANSACTION VOLUME
+-- Finance team ke liye insight ki log kis tarike se pay kar rahe hain
+SELECT 
+    Payment_Method,
+    COUNT(Booking_ID) AS Number_of_Transactions,
+    SUM(Total_Revenue) AS Total_Collection
+FROM rental_data
+GROUP BY Payment_Method
+ORDER BY Number_of_Transactions DESC;
+
+
+-- 5. LOW-RATING ALERT (Operational Maintenance)
+-- Aise equipments jinhe repair ya replace ki zaroorat hai (Rating < 3)
+SELECT 
+    Equipment_Name,
+    COUNT(Booking_ID) AS Bad_Experience_Count,
+    AVG(Customer_Rating) AS Low_Average_Rating
+FROM rental_data
+GROUP BY Equipment_Name
+HAVING AVG(Customer_Rating) < 3.0
+ORDER BY Low_Average_Rating ASC;
