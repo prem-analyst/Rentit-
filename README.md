@@ -32,3 +32,10 @@ The system's backend is structured around core relational database modules to pr
 ## 📂 Project Documentation
 The complete formal project report, containing detailed Entity-Relationship (ER) diagrams, database schemas, and system workflows, is available in this repository:
 📄 **[View Full Black Book Documentation](./Black%20book%20updated%20072026.pdf)**
+---
+
+## 📊 Data Analytics Extension
+To showcase data analyst capabilities, this project includes a business intelligence extension:
+- **Dataset (`rental_data.csv`):** Generated and structured a mock database of 1,000+ transactional rental records.
+- **SQL Business Insights (`insights.sql`):** Developed complex SQL queries to analyze key business metrics including Gross Revenue, Revenue Contribution by Category, Top Demand Products, Preferred Payment Methods, and Low-Rating Customer Feedback Alerts for operational maintenance.
+-
